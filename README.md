@@ -36,8 +36,19 @@ A comprehensive application designed to streamline project management and enhanc
    - Import the provided SQL scripts to create tables.
 
 4. Configure the database connection in the project:
-   - Update database URL, username, and password in the db-config file.
+   - Update database URL, username, and password in the DBConnection file.
 
 5. Deploy the application on a servlet container (e.g., Apache Tomcat).
    
+## Usage
+1. Launch the application on your local server.
+2. Open your browser and navigate to http://localhost:8080/project-tracking-application.
+3. Log in as a user or manager to explore the features.
 
+## License
+This project is licensed under the MIT License.
+
+## Contact
+- Name : Dhanure Heena
+- Email : heena.dhanure@gmail.com
+- GitHub : heenadhanure
