@@ -1,0 +1,382 @@
+USERS TABLE : 
+
+Step 1: Create the users table without auto-increment on id
+
+CREATE TABLE users (
+    username VARCHAR2(50) NOT NULL UNIQUE,
+    first_name VARCHAR2(50) NOT NULL,
+    last_name VARCHAR2(50) NOT NULL,
+    email VARCHAR2(100) NOT NULL UNIQUE,
+    role VARCHAR2(20) NOT NULL,
+    password VARCHAR2(255) NOT NULL,
+    confirm_password VARCHAR2(255) NOT NULL,
+    phone VARCHAR2(15),
+    setprofile BLOB,
+    progress NUMBER(3)
+);
+
+================================================================================================================================
+PROJECTS TABLE : 
+
+Step 1: Create the projects Table
+
+CREATE TABLE projects (
+    project_id NUMBER PRIMARY KEY,
+    project_name VARCHAR2(255) NOT NULL,
+    description CLOB,
+    status VARCHAR2(50) DEFAULT 'Not Started',
+    start_date DATE,
+    end_date DATE,
+    username VARCHAR2(50),
+    progress NUMBER(38),
+    CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
+);
+
+Step 2: Create a Sequence for Auto-Incrementing project_id
+
+CREATE SEQUENCE project_id_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+Step 3: Create a Trigger to Automatically Assign project_id
+
+CREATE OR REPLACE TRIGGER projects_before_insert
+BEFORE INSERT ON projects
+FOR EACH ROW
+BEGIN
+    :NEW.project_id := project_id_seq.NEXTVAL;
+END;
+
+=================================================================
+
+INSERT INTO projects (project_id, project_name, start_date, end_date, status)
+VALUES (5, 'Project Tracking Application', TO_DATE('01/AUG/2024', 'DD/MON/YYYY'), TO_DATE('20/DEC/2024', 'DD/MON/YYYY'), 'In-progress');
+
+==============================================================================================================================
+
+Developer Related Tables : - 
+
+TASKS TABLE : 
+
+Step 1: Create the tasks Table
+
+CREATE TABLE tasks (
+    task_id NUMBER PRIMARY KEY,
+    task_name VARCHAR2(255) NOT NULL,
+    description CLOB,
+    status VARCHAR2(50) DEFAULT 'Pending',
+    task_created_on date,
+    due_date DATE,
+    project_id NUMBER,
+    assigned_user VARCHAR2(50),
+    assigned_by varchar2(50),
+    priority varchar2(10) DEFAULT 'medium' NOT NULL,
+    progress number(38) DEFAULT 0,
+    completion_date DATE,
+    file_date BLOB,
+  
+    CONSTRAINT fk_project_id FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE CASCADE,
+    CONSTRAINT fk_assigned_user FOREIGN KEY (assigned_user) REFERENCES users(username) ON DELETE SET NULL
+);
+
+
+Step 2: Create a Sequence for task_id
+
+CREATE SEQUENCE task_id_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+Step 3: Create a Trigger to Automatically Use the Sequence
+
+CREATE OR REPLACE TRIGGER tasks_before_insert
+BEFORE INSERT ON tasks
+FOR EACH ROW
+BEGIN
+    :NEW.task_id := task_id_seq.NEXTVAL;
+END;
+
+=================================================================================
+
+INSERT INTO tasks (task_id, task_name, description, status, due_date, project_id, assigned_user, assigned_by, priority)
+VALUES (102, 'profile issue', 'profile image is not displaying on the profile icon', 'pending', TO_DATE('05/dec/2024', 'DD/MON/YYYY'), 4, 'heena_dhanure','supriya_achkulwar','high');
+
+=================================================================================================================================
+
+CREATE OR REPLACE TRIGGER increment_user_progress
+AFTER INSERT ON TASK
+FOR EACH ROW
+BEGIN
+    -- Update the PROGRESS of the user who is assigned the task
+    UPDATE USERS
+    SET PROGRESS = NVL(PROGRESS, 0) + 1
+    WHERE USERNAME = :NEW.ASSIGNED_USER;
+END;
+/
+
+================================================================================================================================
+
+BUGS TABLE
+
+Step 1: Create the bugs Table
+
+CREATE TABLE bugs (
+    bug_id INT PRIMARY KEY,
+    title VARCHAR(255),
+    severity VARCHAR(50),
+    developer_id VARCHAR2(255),
+    status VARCHAR(50),
+    created_at TIMESTAMP(6),
+    updated_at TIMESTAMP(6),
+    description VARCHAR2(1000)
+);
+
+Step 2: Create a Sequence for bug_id
+
+CREATE SEQUENCE bug_seq 
+START WITH 1 
+INCREMENT BY 1 
+NOCACHE;
+
+Step 3: Create a Trigger to Automatically Use the Sequence bug_id
+
+CREATE OR REPLACE TRIGGER trg_bugs_id
+BEFORE INSERT ON bugs
+FOR EACH ROW
+BEGIN
+    SELECT bug_seq.NEXTVAL INTO :NEW.bug_id FROM DUAL;
+END;
+/
+
+============================================================================================
+
+INSERT INTO bugs (BUG_ID, TITLE, SEVERITY, DEVELOPER_ID, STATUS, CREATED_AT, UPDATED_AT, DESCRIPTION)
+VALUES (bug_seq.NEXTVAL, 'UI Misalignment on Dashboard', 'Medium', 'heena_dhanure', 'In Progress', systimestamp, systimestamp,'The UI elements are not properly aligned on the dashboard page.');
+
+==============================================================================================================================================
+
+NOTIFICATIONS TABLE 
+
+Step 1: Create the notifications Table
+
+CREATE TABLE notifications (
+    notification_id INT PRIMARY KEY,
+    message CLOB,
+    developer_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Step 2: Create a Sequence for notification_id
+
+CREATE SEQUENCE notification_seq 
+START WITH 1 
+INCREMENT BY 1 
+NOCACHE;
+
+Step 3: Create a Trigger to Automatically Use the Sequence notification_id
+
+CREATE OR REPLACE TRIGGER trg_notifications_id
+BEFORE INSERT ON notifications
+FOR EACH ROW
+BEGIN
+    SELECT notification_seq.NEXTVAL INTO :NEW.notification_id FROM DUAL;
+END;
+/
+
+=======================================================================
+
+INSERT INTO notifications (NOTIFICATION_ID, MESSAGE, developer_id, CREATED_AT)
+VALUES (notification_seq.NEXTVAL, 'Task deadline approaching', 'heena_dhanure', SYSTIMESTAMP);
+
+=========================================================================================
+
+USERS_PROJECTS TABLE
+
+-- Track which users are assigned to which projects.
+-- Record additional information like roles within the project or assignment dates.
+
+CREATE TABLE users_projects (
+    user_id VARCHAR(50) NOT NULL, 									-- Foreign key referencing the username in `users`
+    project_id INT NOT NULL, 										-- Foreign key referencing the project_id in `projects`
+    assigned_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    role VARCHAR(50) DEFAULT 'Developer',
+    PRIMARY KEY (user_id, project_id),
+    FOREIGN KEY (user_id) REFERENCES users(username) ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE CASCADE
+);
+
+=============================================================
+
+INSERT INTO users_projects (user_id, project_id, assigned_date, role)
+VALUES ('heena_dhanure', 4, SYSDATE, 'Developer');
+
+=============================================================
+
+DOCUMENTATION TABLE 
+
+-- Create a table to store documentation links and resources
+
+Step 1 : Create the documentation table
+
+CREATE TABLE documentation (
+    id NUMBER PRIMARY KEY,
+    doc_title VARCHAR2(100),
+    doc_url VARCHAR2(255),
+    description CLOB
+);
+
+Step 2 : Create a Sequence for Auto-Increment
+
+CREATE SEQUENCE documentation_seq
+START WITH 1
+INCREMENT BY 1;
+
+Step 3: Create a Trigger for Automatic ID Assignment
+
+CREATE OR REPLACE TRIGGER documentation_trigger
+BEFORE INSERT ON documentation
+FOR EACH ROW
+BEGIN
+    :NEW.id := documentation_seq.NEXTVAL;
+END;
+/
+
+=====================================================
+
+INSERT INTO documentation (id, doc_title, doc_url, description)
+VALUES (documentation_seq.NEXTVAL, 'Developer Guidelines', 'http://localhost:8080/Project Management System/Documents/ProjectDocumentTemplate.pdf', 'Comprehensive guidelines for developers.');
+
+==========================================================================================================================================
+
+TEAMS TABLE : 
+
+Step 1 : Create the teams table
+
+CREATE TABLE teams (
+    team_id NUMBER PRIMARY KEY,  -- Use NUMBER for auto-increment-like behavior
+    team_name VARCHAR2(255) NOT NULL,
+    team_lead VARCHAR2(255),     -- Username or user_id of the team lead
+    created_date DATE DEFAULT SYSDATE
+);
+
+Step 2 : Create a Sequence for Auto-Increment
+
+CREATE SEQUENCE team_id_seq
+START WITH 1
+INCREMENT BY 1;
+
+Step 3: Create a Trigger for Automatic ID Assignment
+
+CREATE OR REPLACE TRIGGER trg_team_id
+BEFORE INSERT ON teams
+FOR EACH ROW
+BEGIN
+    SELECT team_id_seq.NEXTVAL
+    INTO :NEW.team_id
+    FROM dual;
+END;
+/
+
+===============================================================================================================================
+
+TEAM_MEMBERS TABLE : 
+
+Step 1: Create table team_members
+
+CREATE TABLE team_members (
+    member_id int UNIQUE,
+    team_id INT NOT NULL,
+    username VARCHAR(255) NOT NULL, -- Link to users table
+    role VARCHAR(50), -- e.g., Developer, QA, etc.
+    PRIMARY KEY (team_id, username),
+    FOREIGN KEY (team_id) REFERENCES teams(team_id),
+    FOREIGN KEY (username) REFERENCES users(username)
+);
+
+Step 2 : Create a Sequence for Auto-Increment
+
+CREATE SEQUENCE team_members_seq
+START WITH 1
+INCREMENT BY 1;
+
+Step 3: Create a Trigger for Automatic ID Assignment
+
+CREATE OR REPLACE TRIGGER team_members_auto_increment
+BEFORE INSERT ON team_members
+FOR EACH ROW
+BEGIN
+    :NEW.member_id := team_members_seq.NEXTVAL;
+END;
+/
+
+==============================================================================================================================
+
+TEAM_LEAD_TASKS TABLE : 
+
+Step 1: Create table team_lead_tasks
+
+CREATE TABLE team_lead_tasks (
+    task_id NUMBER PRIMARY KEY,
+    project_name VARCHAR2(255) NOT NULL,
+    task_title VARCHAR2(255) NOT NULL,
+    task_description CLOB NOT NULL,
+    due_date DATE NOT NULL,
+    assigned_to VARCHAR2(255) NOT NULL,
+    task_created_on NOT NULL DATE DEFAULT SYSDATE,
+    company_name VARCHAR2(255),
+    priority VARCHAR2(10) DEFAULT 'Medium' CHECK (priority IN ('High', 'Medium', 'Low')
+);
+
+Step 2 : Create a Sequence for Auto-Increment
+
+CREATE SEQUENCE teamleadtasks_seq
+    START WITH 1
+    INCREMENT BY 1;
+
+Step 3: Create a Trigger for Automatic ID Assignment
+
+CREATE OR REPLACE TRIGGER teamleadtasks_before_insert
+BEFORE INSERT ON TeamLeadTasks
+FOR EACH ROW
+BEGIN
+    :NEW.task_id := teamleadtasks_seq.NEXTVAL;
+END;
+/
+
+=================================================================================================================================
+
+MANAGER_TASKS : 
+
+Step 1: Create table manager_tasks
+
+CREATE TABLE manager_tasks (
+    task_id NUMBER PRIMARY KEY,			 -- Primary Key, auto-incremented using the sequence
+    task_name VARCHAR2(255) NOT NULL,
+    task_description CLOB,
+    assigned_by_client VARCHAR2(100),		 -- Name or ID of the client
+    priority VARCHAR2(10) DEFAULT 'Medium' CHECK (priority IN ('High', 'Medium', 'Low')),
+    assigned_date DATE DEFAULT SYSDATE,
+    due_date DATE NOT NULL,
+    completion_date DATE
+);
+
+Step 2 : Create a Sequence for Auto-Increment
+
+CREATE SEQUENCE manager_tasks_seq 
+START WITH 1 
+INCREMENT BY 1;
+
+Step 3: Create a Trigger for Automatic ID Assignment
+
+CREATE OR REPLACE TRIGGER trg_manager_tasks_id
+BEFORE INSERT ON manager_tasks
+FOR EACH ROW
+BEGIN
+    :NEW.task_id := manager_tasks_seq.NEXTVAL;
+END;
+/
+
+=========================================================================================================================================
+
