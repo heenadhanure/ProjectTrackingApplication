@@ -1,0 +1,155 @@
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register</title>
+</head>
+<body>
+	<form action="register" method="post">
+		UserName : <input type="text" name="uname" required autofocus><br><br>
+		Password : <input type="password" name="pword" required><br><br>
+		First Name : <input type="text" name="fname" required><br><br>
+		Last Name : <input type="text" name="lname" required><br><br>
+		Email : <input type="email" name="email" required><br><br>
+		Role : 	<select id="role" name="role"required>
+					<option value="" disabled selected>select</option>
+					<option value="project manager">Project Manager</option>
+					<option value="team lead">Team Lead</option>
+					<option value="developer">Developer</option>
+			   </select><br><br>
+		<input type="submit" value="Register">
+		<a href="login.html">Back</a>
+	</form>
+</body>
+</html>
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Project Management System</title>
+    <link rel="stylesheet" href="CSS/registerStyle.css">
+</head>
+<body>
+<div class="registration-form">
+<h3>User Registration</h3>
+<form id="registerForm" action="register" method="post" enctype="multipart/form-data">
+
+<table>
+    <tr class="form-group">
+      
+      <td><label for="uname">User Name : </label></td>
+      <td><input type="text" id="name" name="uname" required></td>
+      
+    </tr> 
+    
+      <tr class="form-group">
+      <td><label for="fname"> First Name :</label></td>
+      <td><input type="text" id="fname" name="fname" required></td>
+      </tr>
+   
+      <tr class="form-group">
+        <td><label for="lname">Last Name :</label></td>
+        <td><input type="text" id="lname" name="lname" required></td>
+    </tr>
+    
+    <tr class="form-group">
+        <td><label for="mail">User EmailId : </label></td>
+        <td><input type ="email" id="mail" name="email" required></td>
+     
+    </tr >
+    <tr class="form-group">
+    <td><label for="role">Role</label></td>
+    
+    <td><select id="role" name="role" required>
+    				<option value="" disabled selected>Select</option>
+                    <option value="Project Manager">Project Manager</option>
+                    <option value="Team Lead">Team Lead</option>
+                    <option value="Developer">Developer</option>
+                </select> </td> 
+    </tr>
+    
+     <tr class="form-group">
+        
+       <td><label for="pass"> Enter  Password</label></td>
+      <td><input type="password" id="pass" name="pass" 
+    title="Password must be 8-15 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character." 
+    required></td>
+      </tr>
+   
+    <tr class="form-group">
+    	 <td><label for="conPass"> Confirm Password </label></td>
+      <td><input type="password" id="conPass" name="conPass" required></td>
+      </tr>
+     
+     <tr class="form-group">
+     <td> <label for="phone">Phone Number</label></td>
+     <td> <input type="tel" id="phone" name="phone" title="Please enter a 10-digit phone number" required></td>
+     
+     </tr>
+ 
+      <tr>
+     <td><label for="setprofile">Choose picture to set</label></td>
+     <td> <input type="file" id="setprofile" name="setprofile" accept="image/*" ></td>
+     </tr>
+        <tr class="form-group"><td><button type="submit">Register</button></td>
+        <td><a href="login.html" style="height:50px;border:1px solid black;text-decoration: none;color:black;padding:2px;border-radius: 3px;">Login</a></td>
+        </tr>
+  </table>
+  
+  
+	</form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("registerForm");
+        console.log(form);
+
+        form.addEventListener("submit", function (e) {
+            const password = document.getElementById("pass").value;
+            const confirmPassword = document.getElementById("conPass").value;
+            const email = document.getElementById("mail").value;
+            const phone = document.getElementById("phone").value;
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRegex = /^\d{10}$/;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
+
+            let errorMessages = [];
+
+            // Email Validation
+            if (!emailRegex.test(email)) {
+                errorMessages.push("Please enter a valid email address.");
+            }
+
+            // Phone Number Validation
+            if (!phoneRegex.test(phone)) {
+                errorMessages.push("Phone number must be exactly 10 digits.");
+            }
+
+            // Password Validation
+            if (!passwordRegex.test(password)) {
+                errorMessages.push("Password must be 8-15 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+            }
+
+            // Confirm Password Validation
+            if (password !== confirmPassword) {
+                errorMessages.push("Passwords do not match.");
+            }
+
+            // Show error messages and prevent form submission
+            if (errorMessages.length > 0) {
+                alert(errorMessages.join("\n"));
+                e.preventDefault(); // Prevent form submission
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

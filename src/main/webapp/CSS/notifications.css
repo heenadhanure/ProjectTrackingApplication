@@ -1,0 +1,231 @@
+@charset "ISO-8859-1";
+@charset "ISO-8859-1";
+
+body { 
+    background-color: #f8f9fa; 
+}
+
+.dashboard-header { 
+    background-color: #007bff; 
+    color: white; 
+    padding: 20px; 
+    text-align: center; 
+}
+
+.card { 
+    margin: 15px; 
+}
+
+/* Basic styling for the navigation bar */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.profile-menu {
+    position: relative;
+    display: inline-block;
+    color: white;
+}
+
+.profile-icon {
+    position: relative;
+    display: inline-block;
+    color: white;
+}
+
+/* Profile Dropdown Styling */
+.profile-dropdown {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 30px;
+    right: -5px;
+    color: white;
+    display: none; /* Initially hidden */
+    z-index: 1000;
+    height: 580px;
+    width: 400px;
+    margin-left: 1200px;
+    background-color: rgb(33, 29, 29);
+}
+
+.profile-icon1 {
+    margin-top: 8px;
+    text-align: center;
+}
+
+.profile-dropdown h5 {
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
+
+.profile-dropdown p {
+    color: white;
+}
+
+.action-buttons {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-left: 38%;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    margin-top: 20px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.icon-btn i {
+    font-size: 12px;
+}
+
+/* Different colors for each action */
+.edit-btn { 
+    background-color: #e0f7fa; 
+}
+
+.delete-btn { 
+    background-color: #ffebee; 
+}
+
+/* Hover effects */
+.edit-btn:hover { 
+    background-color: #b2ebf2; 
+    color: #007bff; 
+}
+
+.update-btn:hover { 
+    background-color: #c8e6c9; 
+    color: #28a745; 
+}
+
+.delete-btn:hover { 
+    background-color: #ffcdd2; 
+    color: #dc3545; 
+}
+
+.profile {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 15px;
+    padding: 10px;
+    margin-top: -10px;
+}
+
+/* Grid layout for profile information */
+.profile-info {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 25px 20px;
+    color: white;
+    margin-left: 10%;
+}
+
+.profile-info span {
+    display: block;
+}
+
+/* Button styling */
+.cp {
+    background-color: #79be89;
+    width: 150px;
+    margin-top: 6px;
+    margin-left: 9%;
+    border-radius: 5px;
+    padding: 7px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.cp:hover {
+    background-color: white;
+}
+
+.logout-link {
+    margin-left: 13%;
+    margin-bottom: 10px;
+    color: white;
+}
+
+/* Logout link hover effect */
+.logout-link:hover {
+    color: #d32f2f;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-left: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    text-align: left;
+    padding: 10px;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

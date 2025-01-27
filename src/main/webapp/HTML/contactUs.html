@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+		/* General Reset */
+		* {
+		    margin: 0;
+		    padding: 0;
+		    box-sizing: border-box;
+		}
+		
+		body {
+		    font-family: 'Arial', sans-serif;
+		    line-height: 1.6;
+		    color: #333;
+		    display: flex;
+		    flex-direction: column; /* Flex layout to ensure footer positioning */
+		    min-height: 100vh; /* Full viewport height */
+		}
+		
+		/* Container */
+		.container {
+		    max-width: 1200px;
+		    margin: 0 auto;
+		    padding: 0 20px;
+		}
+		
+		/* Header Section */
+		header {
+		    background-color: #4CAF50;
+		    color: white;
+		    padding: 20px 0;
+		}
+		
+		header .logo {
+		    display: flex;
+		    align-items: center;
+		    gap: 15px;
+		}
+		
+		header .logo h1 {
+		    font-size: 24px;
+		    font-weight: bold;
+		}
+		
+		.logo-img {
+		    width: 50px;
+		    height: auto;
+		    border-radius: 50%;
+		}
+		
+		/* Navigation Menu */
+		nav {
+		    background-color: #333;
+		}
+		
+		nav ul {
+		    list-style: none;
+		    display: flex;
+		    justify-content: center;
+		    padding: 10px 0;
+		}
+		
+		nav ul li {
+		    margin: 0 15px;
+		}
+		
+		nav ul li a {
+		    color: white;
+		    text-decoration: none;
+		    font-size: 1rem;
+		    padding: 10px 15px;
+		    display: inline-block;
+		    transition: background-color 0.3s;
+		}
+		
+		nav ul li a:hover {
+		    background-color: #4CAF50;
+		    border-radius: 5px;
+		}
+		
+		/* Auth Buttons */
+		.auth-buttons button {
+		    padding: 8px 15px;
+		    font-size: 1rem;
+		    color: white;
+		    background-color: #4CAF50;
+		    border: none;
+		    border-radius: 5px;
+		    cursor: pointer;
+		    transition: background-color 0.3s;
+		}
+		
+		.auth-buttons button:hover {
+		    background-color: #3E8E41;
+		}
+		
+		/* Contact Container */
+		.contact-container {
+		    flex: 1;
+		    padding: 40px 20px;
+		    text-align: center;
+		    background: #f9f9f9;
+		}
+		
+		.contact-container header h1 {
+		    font-size: 2.5rem;
+		    color: white;
+		    margin-bottom: 10px;
+		}
+		
+		.contact-container header p {
+		    font-size: 1rem;
+		    color: white;
+		}
+		
+		/* Contact Details */
+		.contact-details {
+		    display: flex;
+		    justify-content: space-around;
+		    text-align: left;
+		    margin: 20px 0;
+		}
+		.contact-item {
+/* 		    border: 1px solid black; 							/* Solid border for structure */
+		    border-radius: 10px; 								/* Smooth rounded corners */
+		    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 		/* Subtle shadow for depth */
+		    padding: 20px; 										/* Inner spacing for content */
+		    width: 350px; 										/* Fixed width */
+		    background-color: white; 							/* Ensures a clean background */
+		    text-align: center; 								/* Centers text inside the box */
+		    margin: 10px auto; 									/* Adds spacing around items */
+		    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+		}
+		
+		/* Hover Effect */
+		.contact-item:hover {
+		    transform: translateY(-5px); /* Slightly lifts the item */
+		    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2); /* Enhances shadow on hover */
+		}ct-item h3 {
+				    font-size: 1.5rem;
+				    color: #4CAF50;
+				    margin-bottom: 10px;
+				}
+		
+		.contact-item p {
+		    font-size: 1rem;
+		    color: #333;
+		}
+		
+		/* Contact Form */
+		.contact-form {
+		    margin: 30px 0;
+		    padding: 20px;
+		    background: white;
+		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		    border-radius: 10px;
+		    text-align: left;
+		    max-width: 600px;
+		    margin: 30px auto;
+		}
+		
+		.contact-form h2 {
+		    font-size: 2rem;
+		    color: #4CAF50;
+		    margin-bottom: 15px;
+		}
+		
+		.contact-form label {
+		    font-size: 1rem;
+		    color: #333;
+		    margin-bottom: 5px;
+		    display: block;
+		}
+		
+		.contact-form input,
+		.contact-form textarea {
+		    width: 100%;
+		    padding: 10px;
+		    margin-bottom: 15px;
+		    border: 1px solid #ccc;
+		    border-radius: 5px;
+		    font-size: 1rem;
+		}
+		
+		.contact-form button {
+		    background-color: #4CAF50;
+		    color: white;
+		    padding: 10px 20px;
+		    border: none;
+		    border-radius: 5px;
+		    cursor: pointer;
+		    font-size: 1rem;
+		    transition: background-color 0.3s;
+		}
+		
+		.contact-form button:hover {
+		    background-color: #3E8E41;
+		}
+		
+		/* Map Section */
+		.map {
+		    margin: 30px 0;
+		}
+		
+		.map-placeholder iframe {
+		    border: none;
+		    width: 100%;
+		    height: 300px;
+		    border-radius: 10px;
+		}
+		
+		/* Footer Section */
+		footer {
+		    background-color: #333;
+		    color: white;
+		    text-align: center;
+		    padding: 20px 0;
+		    margin-top: auto; /* Ensures footer stays at the bottom */
+		}
+		
+		footer p {
+		    margin-bottom: 10px;
+		    font-size: 0.9rem;
+		}
+		
+		footer .social-icons {
+		    display: flex;
+		    justify-content: center;
+		    gap: 15px;
+		}
+		
+		footer .social-icons a img {
+		    width: 24px;
+		    height: 24px;
+		    transition: transform 0.3s;
+		}
+		
+		footer .social-icons a img:hover {
+		    transform: scale(1.2);
+		}
+		
+		/* Responsive Design */
+		@media (max-width: 768px) {
+		    .contact-details {
+		        flex-direction: column;
+		        gap: 20px;
+		    }
+		
+		    .contact-form {
+		        padding: 15px;
+		    }
+		
+		    nav ul {
+		        flex-direction: column;
+		        gap: 10px;
+		    }
+		}
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><img src="../Images/logo.jpeg" alt="Logo" class="logo-img"> Project Management System</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../index.html" id="nav-home">Home</a></li>
+                <li><a href="../HTML/contactUs.html" id="nav-contact">Contact Us</a></li>
+                <li><a href="../HTML/about.html" id="nav-about">About Us</a></li>
+                <li>
+                    <div class="header-right">
+                        <div class="auth-buttons">
+                            <button onclick="window.location.href='../login.html'">Login</button>
+                            <button onclick="window.location.href='../register.html'">Register</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="contact-container">
+        <header>
+            <h1 id="heading">Contact Us</h1>
+            <p>We're here to help you. Reach out to us for any assistance!</p>
+        </header>
+
+        <section class="contact-details">
+            <div class="contact-item">
+                <h3>Our Address</h3>
+                <p>7-1-56, Divyashakti Apartments,<br> Ameerpet, Hyderabad,<br> Telangana 500016</p>
+            </div>
+            <div class="contact-item">
+                <h3>Phone</h3>
+                <p>+91 7038878813 <br> +91 7796026419</p>
+            </div>
+            <div class="contact-item">
+                <h3>Email</h3>
+                <p>support@projectmanagement.com</p>
+                <p>supriyaachkulwar@gmail.com</p>
+            </div>
+        </section>
+
+        <section class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form action="../submitContactForm" method="POST">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+        <section class="map">
+            <h2>Find Us</h2>
+            <div class="map-placeholder">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=https://maps.app.goo.gl/XAhkqcBVSWZK9b6b9" 
+                    width="100%" height="300" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Project by: Shubham Losarwar, Anis Shaikh, Heena Dhanure, Supriya Ackulawar</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram" />
+                </a>
+                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/facebook-new.png" alt="Facebook" />
+                </a>
+                <a href="https://www.youtube.com" target="_blank" aria-label="YouTube">
+                    <img src="https://img.icons8.com/ios-filled/50/000000/youtube-play.png" alt="YouTube" />
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

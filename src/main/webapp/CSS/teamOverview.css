@@ -1,0 +1,189 @@
+@charset "ISO-8859-1";
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Project Selector */
+.project-selector {
+    margin-right: 20px;
+}
+
+.project-selector label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.project-selector select {
+    padding: 8px;
+    font-size: 14px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
+/* Pending Status Styling */
+.status.pending {
+    background: #dc3545;
+}
+
+
+.teams-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #333;
+}
+
+.search-bar input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+.search-bar button {
+    padding: 8px 12px;
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background: #0056b3;
+}
+
+/* Team Cards */
+.team-overview {
+    margin-bottom: 20px;
+}
+
+.team-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.team-card h3 {
+    margin-bottom: 5px;
+    color: #007BFF;
+}
+
+.team-card p {
+    margin: 5px 0;
+}
+
+.view-team-btn {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-team-btn:hover {
+    background: #218838;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background: #f1f1f1;
+}
+
+.status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.status.in-progress {
+    background: #ffc107;
+}
+
+.status.completed {
+    background: #28a745;
+}
+
+/* Progress Overview */
+.progress-container {
+    margin: 10px 0;
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+}
+
+/* Team Actions */
+.team-actions {
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 10px 15px;
+    margin-right: 10px;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.action-btn.add-team {
+    background: #007BFF;
+}
+
+.action-btn.edit-team {
+    background: #ffc107;
+}
+
+.action-btn.delete-team {
+    background: #dc3545;
+}
+
+.action-btn:hover {
+    opacity: 0.9;
+}

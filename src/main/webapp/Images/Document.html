@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://127.0.0.1:5501/icon.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Document_files/all.min.css">
+    <style>
+        .profile-icon img {
+           margin-left: 1480px;
+           width: 40px;
+           height: 40px;
+           border-radius: 50%;
+           object-fit: cover;
+           cursor: pointer;
+        }
+
+        .profile-dropdown{
+            border : 2px solid black;
+            border-radius: 10px;
+            height: 500px;
+            width: 300px;
+            margin-left: 10px; 
+        }
+
+        .profile-dropdown{
+            background-color: rgb(33, 29, 29);
+            margin-left: 1200px;
+        }
+        .profile-dropdown h3{
+            margin-left: 22%;
+            color: white;
+            margin-top: 2px;
+        }
+        .profile-dropdown p{
+            color: white;
+            margin-left: 25%;
+            
+        }
+        .profile-icon1 img{
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 35%;
+            margin-top:20px;
+        }
+
+        .action-buttons {
+            align-items: center;
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            margin-left: 30%;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        .icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .icon-btn i {
+            font-size: 12px;
+        }
+
+        /* Different colors for each action */
+        .edit-btn { background-color: #e0f7fa; }
+        .update-btn { background-color: #e8f5e9; }
+        .delete-btn { background-color: #ffebee; }
+
+        /* Hover effects */
+        .edit-btn:hover { background-color: #b2ebf2; color: #007bff; }   /* Blue for Edit */
+        .update-btn:hover { background-color: #c8e6c9; color: #28a745; } /* Green for Update */
+        .delete-btn:hover { background-color: #ffcdd2; color: #dc3545; } /* Red for Delete */
+
+        .profile p{
+            margin-left: 10%;
+        }
+
+        .profile .cp{
+            margin-top: 6px;
+            margin-left: 9%;
+            background-color: #79be89;
+            border-radius: 5px;
+            padding: 7px;
+            cursor: pointer;
+        }
+
+        .profile .cp:hover{
+            background-color: white;
+        }
+
+        .logout-link {
+            margin-left: 9%;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            font-size: 16px;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .logout-link i {
+            margin-right: 6px;
+            font-size: 18px;
+        }
+
+        /* Hover effect */
+        .logout-link:hover {
+             color: #d32f2f; /* Darker red for logout */
+        }
+
+     </style>
+</head>
+<body>
+    <div class="profile-icon" onclick="showProfile()">
+        <img src="./Document_files/Doru1.jpg" alt="User">
+     </div>
+
+     <div class="profile-dropdown" id="profileDropdown" style="display: none;">
+        
+        <div class="profile-icon1">
+            <img src="./Document_files/Doru1.jpg" alt="User">
+         </div>
+
+         <h3>Shubham Losarwar</h3>
+        <!-- Icons with labels -->
+        <div class="action-buttons">
+            <button class="icon-btn edit-btn" title="Edit Profile">
+               <i class="fas fa-edit"></i>
+            </button>
+            <button class="icon-btn update-btn" title="Update Profile">
+               <i class="fas fa-sync-alt"></i>
+            </button>
+            <button class="icon-btn delete-btn" title="Delete Profile">
+               <i class="fas fa-trash-alt"></i>
+            </button>
+         </div>
+        
+         <hr>
+         <div class="profile">
+         <p>Username&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;shubham_losarwar</p>
+         <p>First Name : &nbsp;&nbsp;&nbsp;Shubham</p>
+         <p>Last Name : &nbsp;&nbsp;&nbsp;Losarwar</p>
+         <p>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;shubham@gmail.com</p>
+         <p>Role &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;Lead Developer</p>
+         <p>Phone&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; +123456789</p>
+
+         <button class="cp">Change Password</button>
+         </div>
+
+        <!-- Logout link with icon -->
+        <a href="javascript:void(0);" onclick="logoutFunction()" class="logout-link">
+            <i class="fas fa-sign-out-alt"></i> Logout
+         </a>
+        
+
+         
+     </div>
+
+     <script>
+        function showProfile() {
+           const dropdown = document.getElementById('profileDropdown');
+           dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        }
+        document.addEventListener('click', function(event) {
+           const dropdown = document.getElementById('profileDropdown');
+           if (!event.target.closest('.profile-icon') && dropdown) {
+              dropdown.style.display = 'none';
+           }
+        });
+
+        function logoutFunction() {
+      if (confirm("Are you sure you want to log out?")) {
+         window.location.href = "/logout"; // Replace with your actual logout URL
+      }
+   }
+     </script>
+     
+    
+      
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>
