@@ -8,8 +8,8 @@ public class DBConnection {
 //	private static Connection con = null;
 	public static final String
 	dbUrl = "jdbc:oracle:thin:@localhost:1522:xe";
-	public static final String uName = "system";
-	public static final String pWord = "Anhee";
+	public static final String uName = "your_username";
+	public static final String pWord = "your_password";
 	private DBConnection() {}
 	static {
 		try {
